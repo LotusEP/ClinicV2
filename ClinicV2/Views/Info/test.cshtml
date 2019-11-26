@@ -1,0 +1,170 @@
+﻿@model ClinicV2.Models.SignupModel
+
+@{
+    ViewBag.Title = "test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>test</h2>
+
+
+@using (Html.BeginForm("Signup","Info",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Patient</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.FName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.FName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.FName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.LName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.LName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.LName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.Street, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.Street, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.CellPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.CellPhone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.CellPhone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.City, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.City, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.City, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.Zip, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.Zip, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.State, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.State, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.State, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.Income, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.Income, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.Income, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.newPatient.Household, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.newPatient.Household, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.newPatient.Household, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div>
+        @Html.Partial("_ClinicPartView", Model.listofClinic)
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    var list = [];
+    list = @Html.Raw(Json.Encode(Model.listofClinic));
+    function Getnewlist() {
+
+
+        alert('test');
+
+
+        alert(list[1].Req[0].Name);
+    }
+
+    function displayClinic() {
+
+        var Income = parseInt(document.getElementById('newPatient_Income').value);
+        var Household = document.getElementById('newPatient_Household').value;
+       // alert(Income);
+       // alert(Household);
+
+        var dis = null;
+        var x = 0;
+
+        for (x =0; x < list.length; x++) {
+            ////var y = 0;
+             // alert('pass1:' + x);
+            for (y =0; y < list[x].Req.length; y++) {
+                //  alert('pass2:' + y);
+                if (list[x].Req[y].Name == ("IncomeFor" + Household)) {
+                 //   alert('pass3');
+                    var val = parseInt(list[x].Req[y].Value);
+                    if (Income < val)
+                    {
+                     //   alert(typeof Income);
+                     //   alert(typeof list[x].Req[y].Value);
+                      //  alert('pass4:' + Income + ": ClinicReq: " + list[x].Req[y].Value);
+                        dis = document.getElementById(list[x].Name);
+                        dis.style.display = "block";
+                    }
+                    else {
+                        dis = document.getElementById(list[x].Name);
+                        dis.style.display = "none";
+                    }
+                }
+            }
+
+        }
+
+
+
+    }
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
